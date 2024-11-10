@@ -21,3 +21,7 @@ Contributions are welcome! Please open an issue or submit a pull request if you 
 ## Contact
 
 If you have any questions or feedback, feel free to reach out.
+
+## Acknowledgements
+
+This project is based on code originally developed by [Said Marouf](https://github.com/maroufsaid/SwiftUIFYI-Examples/blob/main/SwiftUIFYI/Examples/CustomTabbarDemoView.swift). We have adapted and extended it to fit our application's requirements.
