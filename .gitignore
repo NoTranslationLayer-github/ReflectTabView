@@ -1,0 +1,6 @@
+# Ignore Xcode workspace data
+playground.xcworkspace/
+
+# Ignore user-specific data
+xcuserdata/
+
