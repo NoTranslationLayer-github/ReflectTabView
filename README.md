@@ -2,7 +2,7 @@
 
 This repository demonstrates how we implemented a custom SwiftUI tab bar for our app [Reflect](https://apps.apple.com/app/apple-store/id6463800032?pt=126584930&ct=Community&mt=8) that overcomes the limitations of the default `TabView` when using more than five tabs. By dynamically managing which tabs are displayed and using a custom tab bar with horizontal scrolling, we can avoid the automatic "More" tab and create a more flexible navigation experience.
 
-![Custom Tab Bar Demo](tabview.gif)
+<img src="tabview.gif" width="50%">
 
 ## Features
 
