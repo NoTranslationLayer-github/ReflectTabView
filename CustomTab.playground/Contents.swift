@@ -208,14 +208,14 @@ struct ContentView: View {
         NavigationView {
             ZStack(alignment: .bottom) {
                 TabView(selection: $tabManager.selectedTab) {
-                    ForEach(tabManager.tabsToShow, id: \.self) { tab in
+                    ForEach(tabManager.tabsToCache, id: \.self) { tab in
                         TabContentView(tab: tab, tabManager: tabManager)
                             .tag(tab)
                     }
                 }
                 .edgesIgnoringSafeArea(.bottom)
                 .onChange(of: tabManager.selectedTab) { newTab in
-                    tabManager.updateTabsToShow(for: newTab)
+                    tabManager.updatetabsToCache(for: newTab)
                 }
                 
                 CustomTabBar(
@@ -234,7 +234,7 @@ struct ContentView: View {
 }
 
 class TabManager: ObservableObject {
-    @Published var tabsToShow: [TabOption] = []
+    @Published var tabsToCache: [TabOption] = []
     @Published var selectedTab: TabOption = .reflect
     
     let defaultTabs: [TabOption] = [.reflect, .plots, .experiments, .insights]
@@ -242,24 +242,24 @@ class TabManager: ObservableObject {
     
     init() {
         // Initialize tabs to show with default tabs
-        tabsToShow = Array(defaultTabs.prefix(4))
+        tabsToCache = Array(defaultTabs.prefix(4))
     }
     
-    func updateTabsToShow(for newTab: TabOption) {
+    func updatetabsToCache(for newTab: TabOption) {
         // Check if the newTab is one of the default tabs
         if defaultTabs.contains(newTab) {
-            // Update tabsToShow with default tabs, keeping lastNonDefaultTab if available
-            tabsToShow = defaultTabs
-            if let lastTab = lastNonDefaultTab, tabsToShow.count < 5 {
-                tabsToShow.append(lastTab)
+            // Update tabsToCache with default tabs, keeping lastNonDefaultTab if available
+            tabsToCache = defaultTabs
+            if let lastTab = lastNonDefaultTab, tabsToCache.count < 5 {
+                tabsToCache.append(lastTab)
             }
         } else {
             // If newTab is not a default tab, add it as the 5th tab and store it as lastNonDefaultTab
-            if !tabsToShow.contains(newTab) {
-                if tabsToShow.count >= 5 {
-                    tabsToShow.removeLast()
+            if !tabsToCache.contains(newTab) {
+                if tabsToCache.count >= 5 {
+                    tabsToCache.removeLast()
                 }
-                tabsToShow.append(newTab)
+                tabsToCache.append(newTab)
             }
             lastNonDefaultTab = newTab
         }
@@ -281,7 +281,7 @@ struct TabContentView: View {
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Current TabView Tabs:")
                         .font(.headline)
-                    ForEach(tabManager.tabsToShow, id: \.self) { tab in
+                    ForEach(tabManager.tabsToCache, id: \.self) { tab in
                         Text("• \(tab.rawValue)")
                             .foregroundColor(.secondary)
                     }
